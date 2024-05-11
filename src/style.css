@@ -1,0 +1,21 @@
+.hidden {
+  display: none;
+}
+
+.dropdownMenu2, .dropdownMenu{
+  width: max-content;
+}
+
+img {
+  width: 400px;
+  height: auto;
+}
+
+#carouselContainer {
+  width: min-content;
+  height: 266px;
+
+  overflow: auto;
+  overflow-y: hidden; /* Hide vertical scrollbar */
+  overflow-x: hidden; /* Hide horizontal scrollbar */
+}
