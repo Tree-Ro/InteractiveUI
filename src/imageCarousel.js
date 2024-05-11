@@ -16,10 +16,7 @@ function makeimageCarousel(
     },
     set currentImageIndex(index) {
       this._currentImageIndex = index;
-
-      if (this.currentImageIndex >= this.length) {
-        this._currentImageIndex = 0;
-      }
+      this._currentImageIndex %= this.length;
     },
   };
 
