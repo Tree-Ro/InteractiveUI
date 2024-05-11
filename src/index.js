@@ -17,6 +17,6 @@ makeDropDown(
 makeimageCarousel(
   document.querySelector('#prevImgBtn'),
   document.querySelector('#nextImgBtn'),
-  document.querySelector('#carouselContainer'),
-  document.querySelector('#pictureFrame')
+  document.querySelector('#pictureFrame'),
+  5000
 );

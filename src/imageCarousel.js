@@ -1,10 +1,15 @@
-function makeimageCarousel(prevImgBtn, nextImgBtn, container, pictureFrame) {
+function makeimageCarousel(
+  prevImgBtn,
+  nextImgBtn,
+  pictureFrame,
+  nextImageInterval
+) {
   let carousel = {
     _currentImageIndex: 0,
 
     imageNodes: document.querySelectorAll('#pictureFrame > img'),
 
-    _length: document.querySelectorAll('#pictureFrame > img').length, // 3
+    length: document.querySelectorAll('#pictureFrame > img').length,
 
     get currentImageIndex() {
       return Math.abs(this._currentImageIndex);
@@ -12,7 +17,7 @@ function makeimageCarousel(prevImgBtn, nextImgBtn, container, pictureFrame) {
     set currentImageIndex(index) {
       this._currentImageIndex = index;
 
-      if (this.currentImageIndex >= this._length) {
+      if (this.currentImageIndex >= this.length) {
         this._currentImageIndex = 0;
       }
     },
@@ -21,7 +26,7 @@ function makeimageCarousel(prevImgBtn, nextImgBtn, container, pictureFrame) {
   function displayCurrentImage(index) {
     pictureFrame.insertBefore(
       carousel.imageNodes[index],
-      carousel.imageNodes[0]
+      pictureFrame.children[0]
     );
   }
 
@@ -35,8 +40,26 @@ function makeimageCarousel(prevImgBtn, nextImgBtn, container, pictureFrame) {
     displayCurrentImage(carousel.currentImageIndex);
   }
 
+  const carouselParent = pictureFrame.parentElement.parentElement;
+  const selectImageButtons = document.createElement('div');
+  for (let i = 0; i < carousel.length; i++) {
+    const button = document.createElement('button');
+    button.textContent = i;
+    button.addEventListener('click', () => {
+      displayCurrentImage(i);
+    });
+
+    selectImageButtons.appendChild(button);
+  }
+
+  carouselParent.insertBefore(selectImageButtons, prevImgBtn);
+
   nextImgBtn.addEventListener('click', displayNextImage);
   prevImgBtn.addEventListener('click', displayPrevImage);
+
+  if (nextImageInterval) {
+    setInterval(displayNextImage, nextImageInterval);
+  }
 }
 
 export default makeimageCarousel;
